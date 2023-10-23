@@ -15,7 +15,7 @@ cv::Mat OpenCvHelper::GetGrayScaled(const std::vector<std::vector<double>>& sour
 	{
 		for (size_t j = 0; j < columns_count; ++j)
 		{
-			matrix.at<float>(j, i) = static_cast<float>(source[i][j]);
+			matrix.at<float>(i, j) = static_cast<float>(source[i][j]);
 		}
 	}
 

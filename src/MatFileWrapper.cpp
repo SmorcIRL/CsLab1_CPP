@@ -26,12 +26,15 @@ std::vector<std::vector<double>> MatFileWrapper::GetVariableAsDouble2d(const std
 
 	for (size_t i = 0; i < rows; ++i)
 	{
-		auto row = std::vector<double>(columns);
-		for (size_t j = 0; j < columns; ++j)
+		image_source[i] = std::vector<double>(columns);
+	}
+
+	for (size_t j = 0; j < columns; ++j)
+	{
+		for (size_t i = 0; i < rows; ++i)
 		{
-			row[j] = elements[i * columns + j];
+			image_source[i][j] = elements[j * rows + i];
 		}
-		image_source[i] = row;
 	}
 
 	return image_source;
