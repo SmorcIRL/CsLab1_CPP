@@ -4,4 +4,8 @@
     <LocalDebuggerCommandArguments>C:\Users\User\source\repos\CsLab1_CPP\Matlab\test_data_GS_Cut.mat amp1_cut amp2_cut C:\Users\User\source\repos\CsLab1_CPP\Images 0.5 "162 127 110 125"</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerCommandArguments>C:\Users\User\source\repos\CsLab1_CPP\Matlab\test_data_GS_Cut.mat amp1_cut amp2_cut C:\Users\User\source\repos\CsLab1_CPP\Images 0.5 "162 127 110 125"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
 </Project>

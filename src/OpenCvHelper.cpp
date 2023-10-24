@@ -4,7 +4,7 @@
 #include <opencv2/imgcodecs.hpp>
 #include <filesystem>
 
-cv::Mat OpenCvHelper::GetGrayScaled(const std::vector<std::vector<double>>& source) const
+cv::Mat OpenCvHelper::GetGreyScaled(const std::vector<std::vector<double>>& source) const
 {
 	const auto rows_count = source.size();
 	const auto columns_count = source[0].size();
@@ -57,4 +57,27 @@ void OpenCvHelper::SaveImage(const cv::Mat& image, const std::string& folder, co
 	const std::filesystem::path dir(folder);
 	const std::filesystem::path file(file_name);
 	imwrite((dir / file).string(), image);
+}
+
+cv::Mat OpenCvHelper::Shift(const cv::Mat& image, const cv::Point shift) const
+{
+	cv::Mat copy(image.size(), CV_8UC1);
+
+	const cv::Mat trans_mat = (cv::Mat_<double>(2, 3) << 1, 0, shift.x, 0, 1, shift.y);
+	warpAffine(image, copy, trans_mat, image.size());
+
+	return copy;
+}
+
+cv::Mat OpenCvHelper::Sum(const cv::Mat& image1, const cv::Mat& image2) const
+{
+	cv::Mat clone1 = image1.clone();
+	cv::Mat clone2 = image2.clone();
+
+	clone1.convertTo(clone1, CV_32FC1, 0.5);
+	clone2.convertTo(clone2, CV_32FC1, 0.5);
+
+	add(clone1, clone2, clone1);
+
+	return clone1;
 }
