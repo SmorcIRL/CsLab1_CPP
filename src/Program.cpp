@@ -13,10 +13,8 @@ void GetImagesData(const AppConfiguration& configuration, std::vector<std::vecto
 	image2_source = mat_wrapper.GetVariableAsDouble2d(configuration.Image2VariableName);
 }
 
-int main(int argc, char* argv[])
+void Run(const AppConfiguration& config)
 {
-	auto config = AppConfigurationFactory::GetConfiguration(argc, argv);
-
 	std::vector<std::vector<double>> image1_source;
 	std::vector<std::vector<double>> image2_source;
 
@@ -66,6 +64,30 @@ int main(int argc, char* argv[])
 	std::cout << std::format("Template location: x={}, y={}", config.TemplateArea.x, config.TemplateArea.y) << std::endl;
 	std::cout << std::format("Best match location: x={}, y={}", best_match_location.x, best_match_location.y) << std::endl;
 	std::cout << std::format("Shift: x={}, y={}", shift.x, shift.y) << std::endl;
+}
 
-	system("pause");
+int main(const int argc, char* argv[])
+{
+	try
+	{
+		const auto config = AppConfigurationFactory::GetConfiguration(argc, argv);
+
+		Run(config);
+
+		system("pause");
+
+		return EXIT_SUCCESS;
+	}
+	catch (std::exception& ex)
+	{
+		std::cout << std::format("Exception was thrown: {}", ex.what()) << std::endl;
+
+		return EXIT_FAILURE;
+	}
+	catch (...)
+	{
+		std::cout << "Unknown error occurred. Aborting" << std::endl;
+
+		return EXIT_FAILURE;
+	}
 }
